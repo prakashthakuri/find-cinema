@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import '../css/SearchMovies.css'
+
 
 export default function SearchMovies() {
 
