@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function SearchMovies() {
+
+
+    //react hooks
+
+    //states - input query
+
+    const [query, setQuery] = useState('')
+
+    //create the state for movies and update the state appropraite
+
+    const [movies, setMovies] = useState([])
 
     const searchMovies = async (e) => {
         e.preventDefault()
         console.log("Serch Movies")
 
         const myapi = 'ccdf49e24b52698a57b456421eb065bc'
-        const query = "The Lion King"
+        // const query = ""
 
 
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${myapi}&language=en-US&query=${query}&page=1&include_adult=false`
@@ -16,6 +27,8 @@ export default function SearchMovies() {
             const res = await fetch(url)
             const data = await res.json()
             console.log(data)
+            
+            setMovies(data.results)
 
 
         }
@@ -29,7 +42,8 @@ export default function SearchMovies() {
         <div>
             <form className="form" onSubmit= {searchMovies}>
                 <label className="label" htmlFor="query">Movie Name:  <br/>
-                    <input className="input"  type="text" name="query" placeholder="Seach Movies" />
+                    <input className="input"  type="text" name="query" placeholder="Seach Movies"  value= {query}  onChange={(e) =>setQuery(e.target.value)}/>
+                    
                     <br/>
 
                     <button className="button" type="submit">Search</button>
